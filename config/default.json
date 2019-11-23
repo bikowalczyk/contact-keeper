@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://bikowalczyk:biko123@contact-keeper-jgool.mongodb.net/test?retryWrites=true&w=majority"
+}
