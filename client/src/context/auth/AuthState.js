@@ -17,63 +17,36 @@ const AuthState = props => {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
     loading: true,
+    error: null,
+    user: null,
     error: null
   };
 
-  const [state, dispatch] = useReducer(contactReducer, initialState);
+  const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  // Add Contact
-  const addContact = contact => {
-    contact.id = uuid.v4();
-    dispatch({ type: ADD_CONTACT, payload: contact });
-  };
+  // Load User
 
-  // Delete Contact
-  const deleteContact = contact => {
-    dispatch({ type: DELETE_CONTACT, payload: contact });
-  };
+  // Register User
 
-  // Set Current Contact
-  const setCurrent = contact => {
-    dispatch({ type: SET_CURRENT, payload: contact });
-  };
+  // Login User
 
-  // Clear Current Contact
-  const clearCurrent = () => {
-    dispatch({ type: CLEAR_CURRENT });
-  };
+  // Logout
 
-  // Update Contact
-  const updateContact = contact => {
-    dispatch({ type: UPDATE_CONTACT, payload: contact });
-  };
+  // Clear Errors
 
-  // Filter Contacts
-  const filterContacts = text => {
-    dispatch({ type: FILTER_CONTACTS, payload: text });
-  };
-  // Clear Filter
-  const clearFilter = () => {
-    dispatch({ type: CLEAR_FILTER });
-  };
   return (
-    <ContactContext.Provider
+    <AuthContext.Provider
       value={{
-        contacts: state.contacts,
-        current: state.current,
-        filtered: state.filtered,
-        addContact,
-        deleteContact,
-        setCurrent,
-        clearCurrent,
-        updateContact,
-        filterContacts,
-        clearFilter
+        token: state.token,
+        isAuthenticated: state.isAuthenticated,
+        loading: state.loading,
+        user: state.user,
+        error: state.error
       }}
     >
       {props.children}
-    </ContactContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export default ContactState;
+export default AuthState;
